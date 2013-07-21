@@ -1,0 +1,36 @@
+== Overview ==
+
+Raspberry pi communicating one-way with MSP430 over spi.
+
+== Dependencies and Setup ==
+
+* MSP430 board
+* MSP430 cross-compile
+<pre>sudo apt-get install git-core gcc-4.4 texinfo patch libncurses5-dev zlibc zlib1g-dev libx11-dev libusb-dev libreadline6-dev binutils-msp430 gcc-msp430 gdb-msp430 msp430-libc msp430mcu mspdebug srecord libsrecord-dev libgmp-dev</pre>
+
+* Raspbian running on a Raspberry Pi
+<pre>
+modprobe spi_bcm2708
+modprobe spidev
+</pre>
+
+== Compiling ==
+
+Cross-compile and install the msp430 code
+<pre>
+msp430-gcc -Os -mmcu=msp430g2553 -o msp430_spi.elf msp430_spi.c
+sudo mspdebug rf2500
+erase
+prog msp430_spi.elf
+run
+</pre>
+
+On the Raspberry Pi
+<pre>
+gcc spidev_test.c -o spidev_test
+</pre>
+
+Run
+<pre>
+sudo ./spidev_test -s 120000
+</pre>

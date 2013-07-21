@@ -14,6 +14,8 @@ modprobe spi_bcm2708
 modprobe spidev
 </pre>
 
+<img src="screenshots/wiring_diagrams/raspi_msp_spi.png" />
+
 == Compiling ==
 
 Cross-compile and install the msp430 code
